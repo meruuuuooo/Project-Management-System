@@ -29,7 +29,7 @@
         <hr>
         <div class="container-fluid">
           <div>
-            <table class="table table-hover table-bordered" style="width: 1269px">
+            <table class="table table-hover .table-borderless table-responsive" style="width: 1269px">
               <thead class="text-center">
                 <tr>
                   <th>Log ID</th>
