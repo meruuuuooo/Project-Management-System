@@ -1,0 +1,45 @@
+
+body {
+  font-family: Roboto Mono;
+}
+
+
+.invalid-password {
+  border-color: red !important; /* Change border color to red */
+}
+
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
+}
+
+.container{
+  padding-top:50px;
+  margin: auto;
+}
+
+nav, .card-header{
+  background-color: #0198ff;
+}
+
+.card-header{
+  background-color: #67cdff;
+}
+
+.notification-circle {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
