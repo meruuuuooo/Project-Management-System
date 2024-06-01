@@ -32,6 +32,27 @@ if (isset($_POST['formData'])) {
   $conn->query($emailSql);
 
 
+  $sqlReg = "SELECT regDesc FROM ph_region WHERE regCode = '$region'";
+  $resultReg = $conn->query($sqlReg);
+  $rowReg = $resultReg->fetch_assoc();
+  $resRegion = $rowReg['regDesc'];
+
+  $sqlProv = "SELECT provDesc FROM ph_province WHERE provCode = '$province'";
+  $resultProv = $conn->query($sqlProv);
+  $rowProv = $resultProv->fetch_assoc();
+  $resProvince = $rowProv['provDesc'];
+
+  $sqlMunc = "SELECT citymunDesc FROM ph_citymun WHERE citymunCode = '$municipality_city'";
+  $resultMunc = $conn->query($sqlMunc);
+  $rowMunc = $resultMunc->fetch_assoc();
+  $resMunicipality_city = $rowMunc['citymunDesc'];
+
+  $sqlBrgy = "SELECT brgyDesc FROM ph_brgy WHERE brgyCode = '$barangay'";
+  $resultBrgy = $conn->query($sqlBrgy);
+  $rowBrgy = $resultBrgy->fetch_assoc();
+  $resBarangay = $rowBrgy['brgyDesc'];
+  
+
   $sql = "UPDATE tbl_user_profile SET 
           last_name = '$lastname', 
           first_name = '$firstname', 
@@ -42,10 +63,10 @@ if (isset($_POST['formData'])) {
           civil_status = '$civilstatus', 
           religion = '$religion', 
           place_of_birth = '$placeofbirth', 
-          region = '$regionRes', 
-          province = '$provinceRes', 
-          municipality_city = '$municipality_cityRes', 
-          barangay = '$barangayRes', 
+          region = '$resRegion', 
+          province = '$resProvince', 
+          municipality_city = '$resMunicipality_city', 
+          barangay = '$resBarangay', 
           building_street_subdivision = '$street', 
           contact_number = '$contact'
           WHERE user_id = '$user_id'";

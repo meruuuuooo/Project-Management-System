@@ -5,12 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SweetAlert Example</title>
     <style>
-      
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .btn {
+        position: relative;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .back-arrow {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        text-decoration: none;
+        color: #fff;
+        font-size: 18px;
+      }
+
+      .back-arrow:hover {
+        color: #0056b3;
+      }
+
+      a {
+        text-decoration: none;
+      }
     </style>
   </head>
   <body>
-    <button onclick="swal('Hello World!')">Click Me</button>
-    
+    <button type="button" class="btn btn-primary position-relative">
+      <!-- Back arrow -->
+      <span class="back-arrow">&#8592;</span>
+      View
+    </button>
   </body>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </html>

@@ -50,10 +50,13 @@ function updateProject(project_id) {
     success: function (response) {
       var project = JSON.parse(response);
       $("#up_title").val(project.name);
+      $("#up_projectManager").val(project.project_manager);
       $("#up_descriptions").val(project.description);
       $("#up_startDate").val(project.start_date);
       $("#up_endDate").val(project.end_date);
-      $("#up_status").val(project.status);
+      $("#up_projectBudget").val(project.budget);
+      $("#up_projectClient").val(project.client);
+      $("#up_projectPriority").val(project.priority);
     },
   });
 
@@ -72,6 +75,7 @@ function updateProject(project_id) {
       confirmButtonText: "Yes, update it!",
     }).then((result) => {
       if (result.isConfirmed) {
+        $("#updateModal").modal("hide");
         $.ajax({
           url: "../models/updateProject.php",
           type: "POST",
@@ -103,7 +107,9 @@ function updateProject(project_id) {
   });
 }
 
+
 function searchProject(searchValue) {
+  getIDs();
   console.log(searchValue);
   $.ajax({
     url: "../models/searchProject.php",
@@ -123,8 +129,13 @@ function searchProject(searchValue) {
 //     success: function (response) {
 //       $("#taskTable").html(response);
 //     },
+//     error: function (jqXHR, textStatus, errorThrown) {
+//       console.error("Error: " + textStatus, errorThrown);
+//       alert("An error occurred while searching for tasks.");
+//     }
 //   });
 // }
+
 
 function deleteTask(task_id) {
   Swal.fire({
@@ -165,8 +176,6 @@ function deleteTask(task_id) {
 }
 
 function updateTask(task_id) {
-  console.log(task_id);
-
   $("#updateTaskModal").modal("show");
 
   $.ajax({
@@ -201,6 +210,7 @@ function updateTask(task_id) {
       confirmButtonText: "Yes, update it!",
     }).then((result) => {
       if (result.isConfirmed) {
+        $("#updateTaskModal").modal("hide");
         $.ajax({
           url: "../models/updateTask.php",
           type: "POST",
@@ -233,7 +243,6 @@ function updateTask(task_id) {
 }
 
 function checkPassFrmt() {
-  // Get the value of the new password input field
   var newPassword = document.getElementById("info_new_pass").value;
 
   // Regular expressions to match password format
@@ -241,14 +250,12 @@ function checkPassFrmt() {
   var alphaRegex = /[a-zA-Z]/; // Alphabetic characters
   var numericRegex = /[0-9]/; // Numerical characters
 
-  // Check if the new password matches the format
   var isLengthValid = lengthRegex.test(newPassword);
   var isAlphaValid = alphaRegex.test(newPassword);
   var isNumericValid = numericRegex.test(newPassword);
 
   document.getElementById("info_new_pass").classList.remove("invalid-password");
 
-  // Display appropriate message based on password format
   if (!isLengthValid) {
     document.getElementById("info_new_pass").classList.add("invalid-password");
   } else if (!isAlphaValid) {
@@ -259,7 +266,6 @@ function checkPassFrmt() {
 }
 
 function checkRetPassFrmt() {
-  // Get the value of the new password input field
   var Password = document.getElementById("info_ret_pass").value;
 
   // Regular expressions to match password format
@@ -267,14 +273,12 @@ function checkRetPassFrmt() {
   var alphaRegex = /[a-zA-Z]/; // Alphabetic characters
   var numericRegex = /[0-9]/; // Numerical characters
 
-  // Check if the new password matches the format
   var isLengthValid = lengthRegex.test(Password);
   var isAlphaValid = alphaRegex.test(Password);
   var isNumericValid = numericRegex.test(Password);
 
   document.getElementById("info_ret_pass").classList.remove("invalid-password");
 
-  // Display appropriate message based on password format
   if (!isLengthValid) {
     document.getElementById("info_ret_pass").classList.add("invalid-password");
   } else if (!isAlphaValid) {
@@ -285,12 +289,10 @@ function checkRetPassFrmt() {
 }
 
 function savePass() {
-  // Get the values of the old password, new password, and retry password input fields
   var oldPassword = document.getElementById("info_old_pass").value;
   var newPassword = document.getElementById("info_new_pass").value;
   var retryPassword = document.getElementById("info_ret_pass").value;
 
-  // Check if the new password matches the retry password
   if (newPassword !== retryPassword) {
     Swal.fire({
       icon: "error",
@@ -309,14 +311,11 @@ function savePass() {
     return;
   }
 
-  // You can add additional validation here if needed
 
-  // Send an AJAX request to a server-side script to handle password saving
   $.ajax({
-    url: "../models/resetPassword.php", // Specify the URL of the server-side script
-    type: "POST", // Specify the HTTP method (POST in this case)
+    url: "../models/resetPassword.php", 
+    type: "POST", 
     data: {
-      // Pass the data to the server-side script
       oldPassword: oldPassword,
       newPassword: newPassword,
     },
@@ -342,24 +341,17 @@ function savePass() {
 }
 
 $(document).ready(function () {
-  // Call the function to fetch user details when the document is ready
   getUserDetails();
 });
 
-// Define a function to fetch user details from the server
 function getUserDetails() {
   $.ajax({
-    url: "../models/getUserDetails.php", // Specify the URL of the server-side script
-    type: "GET", // Use GET method to retrieve data
+    url: "../models/getUserDetails.php",
+    type: "GET", 
     success: function (response) {
-      // Define a function to handle the success response
-      // Parse the JSON response
       var userDetails = JSON.parse(response);
       console.log(userDetails);
-
-      // Check if the response contains user details
       if (userDetails && !userDetails.error) {
-        // Update the input fields with user details
         $("#info_lname").val(userDetails.last_name);
         $("#info_fname").val(userDetails.first_name);
         $("#info_mname").val(userDetails.middle_name);
@@ -369,15 +361,14 @@ function getUserDetails() {
         $("#info_civilstatus").val(userDetails.civil_status);
         $("#info_religion").val(userDetails.religion);
         $("#info_placeofbirth").val(userDetails.place_of_birth);
-        $("#info_reg").val(userDetails.region);
-        $("#info_prov").val(userDetails.province);
-        $("#info_munc").val(userDetails.municipality_city);
-        $("#info_brgy").val(userDetails.barangay);
-        $("#info_strt").val(userDetails.building_street_subdivision);
+        $("#in_region").val(userDetails.region);
+        $("#in_province").val(userDetails.province);
+        $("#in_city").val(userDetails.municipality_city);
+        $("#in_barangay").val(userDetails.barangay);
+        $("#in_strt").val(userDetails.building_street_subdivision);
         $("#info_mobile").val(userDetails.contact_number);
         $("#info_email").val(userDetails.email);
       } else {
-        // Handle the case where user details are not found or an error occurs
         console.error("Error fetching user details:", userDetails.error);
       }
     },
@@ -421,20 +412,15 @@ function getUserDetails() {
 }
 
 function showLogs() {
-  // Make an AJAX request to fetch log data
   $.ajax({
     url: "../models/getLogs.php",
     method: "GET",
     success: function (response) {
-      // Parse the JSON response
       var logs = JSON.parse(response);
 
-      // Check if logs is an array
       if (Array.isArray(logs)) {
-        // Clear existing table rows
         $("#logsTable tbody").empty();
 
-        // Populate the table with log data
         logs.forEach(function (log) {
           $("#logsTable tbody").append(
             "<tr>" +
@@ -473,53 +459,85 @@ function showLogs() {
   });
 }
 
-// Attach event listener to modal show event
 $("#myLogsModal").on("show.bs.modal", function () {
-  // Call the function to show logs when the modal is shown
   showLogs();
 });
 
 $(document).ready(function () {
-  // Add an event listener to the form submission
   $("#signupForm").submit(function (event) {
-    // Prevent the default form submission behavior
     event.preventDefault();
-    // Call the signup function when the form is submitted
     signup();
   });
 });
 
-function signup() {
-  // Create FormData object and append form data
-  var formData = new FormData(document.getElementById("signupForm"));
+function login() {
+  let formData = new FormData(document.getElementById("loginForm"));
 
-  // Send an AJAX request
+  $.ajax({
+    url: "../models/login.php",
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    dataType: "json",
+    success: function(response) {
+      if (response.hasOwnProperty("success")) {
+        sessionStorage.setItem("welcomeMessage", "Welcome to Project Management");
+        window.location.href = "/sites/dashboard.php";
+      } else if (response.hasOwnProperty("error")) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: response.error,
+        }).then(() => {
+          location.reload();
+        });
+      }
+    },
+    error: function(xhr, status, error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "An unexpected error occurred.",
+      });
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  const welcomeMessage = sessionStorage.getItem("welcomeMessage");
+  if (welcomeMessage) {
+    $('#welcomeModal').modal('show');
+    sessionStorage.removeItem("welcomeMessage");
+  }
+});
+
+
+function signup() {
+  let formData = new FormData(document.getElementById("signupForm"));
+
   $.ajax({
     url: "../models/signup.php",
     type: "POST",
     data: formData,
-    processData: false, // Prevent jQuery from processing the data
-    contentType: false, // Prevent jQuery from setting the content type
+    processData: false, 
+    contentType: false, 
     dataType: "json",
     success: function (response) {
       if (response.hasOwnProperty("success")) {
-        // If the response contains a success message
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: response.success, // Show the success message from the response
+          text: response.success,
         }).then(() => {
-          // Redirect to the login page after showing the success message
           window.location.href = "/sites/login.php";
         });
       } else if (response.hasOwnProperty("error")) {
-        // If the response contains an error message
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: response.error, // Show the error message from the response
+          text: response.error,
         }).then(() => {
-          // Reload the page after showing the error message
           location.reload();
         });
       }
@@ -563,3 +581,26 @@ function getTaskCount(project_ids) {
     },
   });
 }
+
+$(document).ready(function() {
+  fetchDashboardData();
+
+  function fetchDashboardData() {
+    $.ajax({
+      url: "../models/getDashboardData.php",
+      type: "GET",
+      dataType: "json",
+      success: function(response) {
+        $('#totalProjects').text(response.totalProjects);
+        $('#totalTasks').text(response.totalTasks);
+        $('#completedTasks').text(response.completedTasks);
+        $('#pendingTasks').text(response.pendingTasks);
+        $('#inprogress').text(response.inprogress);
+      },
+      error: function(xhr, status, error) {
+        console.error("Error fetching dashboard data:", status, error);
+      }
+    });
+  }
+});
+

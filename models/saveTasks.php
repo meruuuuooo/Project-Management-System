@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 ?>
 
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal">Create Task</button>
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#taskModal">Create Task</button>
 
 <div class="modal fade" id="taskModal">
   <div class="modal-dialog modal-dialog-centered">
@@ -51,23 +51,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="modal-body">
 
           <div class="form-group">
-            <label for="title">Title:</label>
+            <label for="title">Task <span class="required text-danger">*</span></label>
             <input type="text" class="form-control" id="title" name="inp_title" required>
           </div>
           <div class="form-group">
-            <label for="descriptions">Description:</label>
-            <textarea class="form-control" id="descriptions" name="inp_description" rows="3" required></textarea>
+            <label for="descriptions">Description </label>
+            <textarea class="form-control" id="descriptions" name="inp_description" rows="3"></textarea>
           </div>
           <div class="form-group">
-            <label for="deadline">Start Date:</label>
+            <label for="deadline">Start Date <span class="required text-danger">*</span></label>
             <input type="date" class="form-control" id="startDate" name="inp_startdate" required>
           </div>
           <div class="form-group">
-            <label for="deadline">End Date:</label>
+            <label for="deadline">End Date <span class="required text-danger">*</span></label>
             <input type="date" class="form-control" id="endDate" name="inp_enddate" required>
           </div>
           <div class="form-group">
-            <label for="status">Status:</label>
+            <label for="status">Status <span class="required text-danger">*</span></label>
             <select class="form-control" id="status" name="inp_status" required>
               <option value="Pending">Pending</option>
               <option value="In Progress">In Progress</option>

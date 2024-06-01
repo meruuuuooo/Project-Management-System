@@ -34,15 +34,15 @@
             <form action="../models/resetPassword.php" method="POST">
               <div class="row">
                 <div class="col-md-3">
-                  <label class="col-form-label-sm text-dark-emphasis ">Old Password</label>
+                  <label class="col-form-label-sm text-dark-emphasis ">Old Password <span class="required text-danger">*</span></label>
                   <input id="info_old_pass" type="password" class="text-proper form-control " placeholder="Old Password">
                 </div>
                 <div class="col-md-3">
-                  <label class="col-form-label-sm text-dark-emphasis ">New Password</label>
+                  <label class="col-form-label-sm text-dark-emphasis ">New Password <span class="required text-danger">*</span></label>
                   <input onkeyup="checkPassFrmt()" id="info_new_pass" value="" type="password" class=" form-control  " placeholder="New Password">
                 </div>
                 <div class="col-md-3">
-                  <label class="col-form-label-sm text-dark-emphasis ">Retry Password</label>
+                  <label class="col-form-label-sm text-dark-emphasis ">Retry Password <span class="required text-danger">*</span></label>
                   <input onkeyup="checkRetPassFrmt()" id="info_ret_pass" value="" type="password" class="text-proper form-control  text-proper" placeholder="Re Retry Password">
                 </div>
                 <div class="col-md-3">

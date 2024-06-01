@@ -23,7 +23,7 @@ function deleteProject($project_id)
 
   if ($tasks_deleted && $project_deleted && $projectName) {
     include '../models/trackAction.php';
-    logsAction("Deleted", "Project : $projectName", $conn);
+    logsAction("Deleted", "Project : $projectName", $conn); 
     $response = array("success" => true, "message" => "Project deleted successfully");
   } else {
     $response = array("success" => false, "message" => "Error occurred during deletion");

@@ -19,7 +19,7 @@ def auto_click(interval, item_count, required_item_amount):
             
 
 if __name__ == "__main__":
-    auto_click(20, 199, 2)
+    auto_click(28, 86, 2)
 
 
 # brick - 124 seconds

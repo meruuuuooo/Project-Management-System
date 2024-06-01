@@ -40,7 +40,7 @@
               </div>
               <div class="col-md-3">
                 <label class="col-form-label-sm text-dark-emphasis">Middle Name</label>
-                <input id="info_mname" name="info_mname" readonly type="text" class="text-proper form-control" placeholder="Middle Name">
+                <input id="info_mname" name="info_mname" type="text" class="text-proper form-control" placeholder="Middle Name">
               </div>
               <div class="col-md-3">
                 <label class="col-form-label-sm text-dark-emphasis">Name Extension (eg Jr)</label>
@@ -80,54 +80,32 @@
               </div>
             </div>
             <div class="box-title text-primary mt-3"><b>Home Address</b></div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myAddressModal">
+              Select Address
+            </button>
             <hr>
             <div class="row">
               <div class="col-md-4">
-                <label class="col-form-label-sm text-dark-emphasis">Region <span class="required text-danger">*</span></label>
-                <select id="info_reg" name="info_reg" class="form-control text-proper" onchange="displayProvince(this.value)">
-                  <?php
-                  include "../config/db_connection.php";
-
-                  $sql = "SELECT * FROM ph_region";
-                  $result = $conn->query($sql);
-
-                  if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                  ?>
-                      <option value="<?= $row['regCode'] ?>"><?= $row['regDesc'] ?></option>
-                  <?php
-                    }
-                  } else {
-                    echo "0 results";
-                  }
-                  $conn->close();
-                  ?>
-                </select>
+                <label for="" class="col-form-label-sm text-dark-emphasis">Region</label>
+                <input id="in_region" name="in_region" type="text" class="form-control text-proper">
               </div>
               <div class="col-md-4">
-                <label class="col-form-label-sm text-dark-emphasis">Province <span class="required text-danger">*</span></label>
-                <select id="info_prov" name="info_prov" class="form-control text-proper" onchange="displayMunCity(this.value)" >
-
-                </select>
+                <label for="" class="col-form-label-sm text-dark-emphasis">Province</label>
+                <input id="in_province" name="in_province" type="text" class="form-control text-proper">
               </div>
               <div class="col-md-4">
-                <label class="col-form-label-sm text-dark-emphasis">Municipality/City <span class="required text-danger">*</span></label>
-                <select id="info_munc" name="info_munc" class="form-control text-proper" onchange="displayBrgy(this.value)" >
-
-                </select>
+                <label for="" class="col-form-label-sm text-dark-emphasis">Municipality/City</label>
+                <input id="in_city" name="in_city" type="text" class="form-control text-proper">
               </div>
             </div>
             <div class="row">
-
               <div class="col-md-6">
-                <label class="col-form-label-sm text-dark-emphasis">Barangay <span class="required text-danger">*</span></label>
-                <select id="info_brgy" name="info_brgy" class="form-control text-proper">
-
-                </select>
+                <label for="" class="col-form-label-sm text-dark-emphasis">Barangay</label>
+                <input id="in_barangay" name="in_barangay" type="text" class="form-control text-proper">
               </div>
               <div class="col-md-6">
                 <label class="col-form-label-sm text-dark-emphasis">Building No. | Street | Subdivision</label>
-                <input id="info_strt" name="info_strt" type="text" class="form-control text-proper" placeholder="Building No. | Street | Subdivision">
+                <input id="in_strt" name="in_strt" type="text" class="form-control text-proper" placeholder="Building No. | Street | Subdivision">
               </div>
             </div>
             <div class="box-title text-primary mt-3"><b>Contact Information</b></div>
@@ -145,6 +123,72 @@
             </div>
           </div>
         </div>
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="myAddressModal">
+          <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Update Address</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label class="col-form-label-sm text-dark-emphasis">Region</label>
+                    <select id="info_reg" name="info_reg" class="form-control text-proper" onchange="displayProvince(this.value)">
+                      <?php
+                      include "../config/db_connection.php";
+
+                      $sql = "SELECT * FROM ph_region";
+                      $result = $conn->query($sql);
+
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                      ?>
+                          <option value="<?= $row['regCode'] ?>"><?= $row['regDesc'] ?></option>
+                      <?php
+                        }
+                      } else {
+                        echo "0 results";
+                      }
+                      $conn->close();
+                      ?>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="col-form-label-sm text-dark-emphasis">Province</label>
+                    <select id="info_prov" name="info_prov" class="form-control text-proper" onchange="displayMunCity(this.value)">
+
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label class="col-form-label-sm text-dark-emphasis">Municipality/City</label>
+                    <select id="info_munc" name="info_munc" class="form-control text-proper" onchange="displayBrgy(this.value)">
+
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="col-form-label-sm text-dark-emphasis">Barangay</label>
+                    <select id="info_brgy" name="info_brgy" class="form-control text-proper">
+
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="submit" id="btnprofilesave" class="btn btn-primary ">
+                  <i class="fa fa-save"></i> Save Address
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div class="card-footer mt-2 text-end">
           <button type="submit" id="btnprofilesave" class="btn btn-primary ">
             <i class="fa fa-save"></i> Save Information
@@ -152,8 +196,13 @@
         </div>
       </form>
     </div>
+
+
+
+
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="/assets/js/ph_address.js"></script>
 <script src="/assets/js/main.js"></script>
+
 </html>

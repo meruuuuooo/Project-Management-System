@@ -6,23 +6,18 @@
     </button>
     <div class="collapse navbar-collapse" id="mynavbar">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="/sites/user.php">
-            <i class="fas fa-user-plus"></i> profile
-          </a>
-        </li>
-        <li>
-          <a class="nav-link text-white" href="/sites/setting.php">
-            <i class="fas fa-user-plus"></i> setting
-          </a>
-        </li>
       </ul>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="/models/logout.php">
-            <i class="fas fa-sign-out-alt"></i> Logout
-          </a>
-        </li>
+      <div class="dropdown">
+        <button type="button" class="btn btn-secondary text-white dropdown-toggle" data-bs-toggle="dropdown">
+          Settings
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/sites/user.php">User</a></li>
+          <li><a class="dropdown-item" href="/sites/setting.php">Password</a></li>
+          <li><a class="dropdown-item text-danger " href="/models/logout.php">Logout</a></li>
+        </ul>
+      </div>
     </div>
+  </div>
   </div>
 </nav>

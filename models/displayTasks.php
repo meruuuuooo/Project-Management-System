@@ -26,7 +26,7 @@ if (isset($_GET['project_id'])) {
           <td><?php echo $row['status']; ?></td>
           <td class="text-center">
             <div class="btn-group">
-              <button type="button" class="btn btn-success" onclick="updateTask(this.value)" value="<?php echo $row['task_id']; ?>">Update</button>
+              <button type="button" class="btn btn-primary" onclick="updateTask(this.value)" value="<?php echo $row['task_id']; ?>">Update</button>
               <button type="button" class="btn btn-danger" onclick="deleteTask(this.value)" value="<?php echo $row['task_id']; ?>">Delete</button>
             </div>
           </td>

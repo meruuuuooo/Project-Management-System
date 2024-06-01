@@ -31,18 +31,21 @@ if ($user_id !== null) {
 ?>
       <tr>
         <td><?php echo $row['name']; ?></td>
+        <td><?php echo $row['project_manager']; ?></td>
         <td><?php echo $row['description']; ?></td>
         <td><?php echo $row['start_date']; ?></td>
         <td><?php echo $row['end_date']; ?></td>
-        <td><?php echo $row['status']; ?></td>
+        <td><?php echo $row['budget']; ?></td>
+        <td><?php echo $row['client']; ?></td>
+        <td><?php echo $row['priority']; ?></td>
         <td class="text-center">
           <a href="../sites/task.php?project_id=<?php echo $row['project_id']; ?>">
             <button type="button" class="btn btn-primary position-relative">
-              View
+              Open
               <span class="notification-circle" id="taskCount_<?php echo $row['project_id']; ?>"></span>
             </button>
           </a>
-        </td> 
+        </td>
         <td class="text-center">
           <div class="btn-group">
             <button type="button" id="btn-notif" name="updateEl" class="btn btn-primary" onclick="updateProject(this.value)" value="<?php echo $row['project_id'] ?>">
@@ -54,12 +57,13 @@ if ($user_id !== null) {
           </div>
         </td>
       </tr>
+
     <?php
     }
   } else {
     ?>
     <tr>
-      <td colspan="7" class="text-center">No Projects Found</td>
+      <td colspan="10" class="text-center text-danger ">No Projects Found</td>
     </tr>
 <?php
   }
